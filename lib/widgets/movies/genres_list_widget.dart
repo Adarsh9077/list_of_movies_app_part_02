@@ -4,18 +4,15 @@ import 'package:mvvm_state_management/models/movies_genres.dart';
 import 'package:mvvm_state_management/models/movies_modal.dart';
 import 'package:mvvm_state_management/utils/genres_utils.dart';
 
-class GenresListWidget extends StatefulWidget {
-  const GenresListWidget({super.key, required this.moviesModal});
-  final MoviesModal moviesModal;
-  @override
-  State<StatefulWidget> createState() => _GenresListWidget();
-}
-
-class _GenresListWidget extends State<GenresListWidget> {
+class GenresListWidget extends StatelessWidget {
+  const GenresListWidget({super.key, 
+  //required this.moviesModal
+  });
+  // final MoviesModal moviesModal;
   @override
   Widget build(BuildContext context) {
-    List<MoviesGenres> moviesGenres = GenresUtils.moviesGenresName(
-      widget.moviesModal.genreIds,
+    List<MoviesGenres> moviesGenres = GenresUtils.moviesGenresName([]
+      //moviesModal.genreIds,
     );
     return Wrap(
       children: List.generate(

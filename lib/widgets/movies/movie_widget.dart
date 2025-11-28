@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mvvm_state_management/constants/my_app_constant.dart';
 import 'package:mvvm_state_management/constants/my_app_icons.dart';
 import 'package:mvvm_state_management/models/movies_modal.dart';
 import 'package:mvvm_state_management/screens/movie_details.dart';
@@ -10,8 +11,11 @@ import '../cached_image.dart';
 import 'favorite_btn.dart';
 
 class MovieWidget extends StatelessWidget {
-  const MovieWidget({super.key, required this.moviesModal});
-  final MoviesModal moviesModal;
+  const MovieWidget({
+    super.key,
+    //  required this.moviesModal
+  });
+  // final MoviesModal moviesModal;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +28,9 @@ class MovieWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           onTap: () {
             getIt<NavigationService>().navigator(
-              MovieDetailScreen(moviesModel: moviesModal),
+              MovieDetailScreen(
+                // moviesModel: moviesModal
+              ),
             );
           },
           child: Padding(
@@ -34,23 +40,24 @@ class MovieWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Hero(
-                    tag: moviesModal.id,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(12.0),
-                      child: CachedImageWidget(
-                        imgUrl:
-                            "https://image.tmdb.org/t/p/w500/${moviesModal.backdropPath}",
-                      ),
+                  // Hero(
+                  //   tag: "", //moviesModal.id,
+                  //   child:
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(12.0),
+                    child: CachedImageWidget(
+                      imgUrl: MyAppConstants.movieImage,
+                      // "https://image.tmdb.org/t/p/w500/${moviesModal.backdropPath}",
                     ),
                   ),
+                  // ),
                   const SizedBox(width: 10),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          moviesModal.title,
+                          "moviesModal.title",
                           style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -62,12 +69,15 @@ class MovieWidget extends StatelessWidget {
                             Icon(Icons.star, color: Colors.amber, size: 20),
                             SizedBox(width: 5),
                             Text(
-                              "${moviesModal.voteAverage.toStringAsFixed(1)}/10",
+                              "8.0/10",
+                              // "${moviesModal.voteAverage.toStringAsFixed(1)}/10",
                             ),
                           ],
                         ),
                         const SizedBox(height: 10),
-                        GenresListWidget(moviesModal: moviesModal),
+                        GenresListWidget(
+                          // moviesModal: moviesModal
+                        ),
                         Row(
                           mainAxisSize: MainAxisSize.max,
                           // mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -78,11 +88,13 @@ class MovieWidget extends StatelessWidget {
                             ),
                             const SizedBox(width: 5),
                             Text(
-                              moviesModal.releaseDate,
+                              " moviesModal.releaseDate",
                               style: TextStyle(color: Colors.grey),
                             ),
                             const Spacer(),
-                            FavoriteBtnWidget(moviesModal: moviesModal),
+                            FavoriteBtnWidget(
+                              // moviesModal: moviesModal
+                            ),
                             // Todo: Add the favorite button
                           ],
                         ),

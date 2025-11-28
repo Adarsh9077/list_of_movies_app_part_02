@@ -28,8 +28,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Movies App',
       theme: MyThemeData.lightTheme,
-      home: const SplashScreen(),
-      // home:  const MovieDetailScreen(),
+      // home: const SplashScreen(),
+      home:  const MoviesScreen(),
     );
   }
 }

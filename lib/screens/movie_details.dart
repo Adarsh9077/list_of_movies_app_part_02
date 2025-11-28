@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:mvvm_state_management/constants/my_app_constant.dart';
 import 'package:mvvm_state_management/widgets/cached_image.dart';
 import 'package:mvvm_state_management/widgets/movies/favorite_btn.dart';
 import 'package:mvvm_state_management/widgets/movies/genres_list_widget.dart';
 import 'package:mvvm_state_management/models/movies_modal.dart';
 
 class MovieDetailScreen extends StatelessWidget {
-  const MovieDetailScreen({super.key, required this.moviesModel});
+  const MovieDetailScreen({super.key,
+   /*required this.moviesModel*/});
 
-  final MoviesModal moviesModel;
+  // final MoviesModal moviesModel;
 
   @override
   Widget build(BuildContext context) {
@@ -16,15 +18,12 @@ class MovieDetailScreen extends StatelessWidget {
       body: SafeArea(
         child: Stack(
           children: [
-            Hero(
-              tag: moviesModel.id,
-              child: SizedBox(
-                height: size.height * 0.45,
-                width: double.infinity,
-                child: CachedImageWidget(
-                  imgUrl:
-                      "https://image.tmdb.org/t/p/w500/${moviesModel.backdropPath}",
-                ),
+            SizedBox(
+              height: size.height * 0.45,
+              width: double.infinity,
+              child: CachedImageWidget(
+                imgUrl: MyAppConstants.movieImage
+                   // "https://image.tmdb.org/t/p/w500/${moviesModel.backdropPath}",
               ),
             ),
             SingleChildScrollView(
@@ -44,7 +43,7 @@ class MovieDetailScreen extends StatelessWidget {
                               children: [
                                 SizedBox(height: 25),
                                 Text(
-                                  moviesModel.title,
+                                  "moviesModel.title",
                                   maxLines: 2,
                                   style: const TextStyle(
                                     fontSize: 28,
@@ -60,8 +59,8 @@ class MovieDetailScreen extends StatelessWidget {
                                       size: 20,
                                     ),
                                     SizedBox(width: 5),
-                                    Text(
-                                      "${moviesModel.voteAverage.toStringAsFixed(1)}/10",
+                                    Text("8.0/10"
+                                      // "${moviesModel.voteAverage.toStringAsFixed(1)}/10",
                                     ),
                                     Spacer(),
                                     Row(
@@ -78,7 +77,7 @@ class MovieDetailScreen extends StatelessWidget {
                                         ),
                                         SizedBox(width: 10),
                                         Text(
-                                          moviesModel.releaseDate,
+                                          "moviesModel.releaseDate",
                                           style: TextStyle(color: Colors.grey),
                                         ),
                                       ],
@@ -86,10 +85,10 @@ class MovieDetailScreen extends StatelessWidget {
                                   ],
                                 ),
                                 const SizedBox(height: 10),
-                                GenresListWidget(moviesModal: moviesModel),
+                                GenresListWidget(/*moviesModal: moviesModel*/),
                                 const SizedBox(height: 15),
                                 Text(
-                                  moviesModel.overview,
+                                  "moviesModel.overview "*200,
                                   textAlign: TextAlign.justify,
                                   style: TextStyle(
                                     height: 1.75,
@@ -110,7 +109,9 @@ class MovieDetailScreen extends StatelessWidget {
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(6.0),
-                            child: FavoriteBtnWidget(moviesModal: moviesModel),
+                            child: FavoriteBtnWidget(
+                              // moviesModal: moviesModel
+                            ),
                           ),
                         ),
                       ),
