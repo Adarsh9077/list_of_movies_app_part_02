@@ -23,6 +23,7 @@ class MoviesScreen extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
+              themeProvider.toggleTheme();
               // Todo: Navigate to the favorites screen
               getIt<NavigationService>().navigator(FavoritesScreen());
               // Navigator.push(
