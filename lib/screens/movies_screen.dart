@@ -1,5 +1,7 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:mvvm_state_management/view_models/theme_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:mvvm_state_management/constants/my_app_icons.dart';
 import 'package:mvvm_state_management/models/movies_genres.dart';
 import 'package:mvvm_state_management/models/movies_modal.dart';
@@ -14,6 +16,7 @@ class MoviesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("Popular Movies"),
