@@ -1,5 +1,7 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:mvvm_state_management/constants/my_app_constant.dart';
+import 'package:mvvm_state_management/constants/my_theme_data.dart';
 import 'package:mvvm_state_management/view_models/theme_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:mvvm_state_management/constants/my_app_icons.dart';
@@ -12,18 +14,18 @@ import 'package:mvvm_state_management/services/navigation_service.dart';
 import 'package:mvvm_state_management/widgets/movies/movie_widget.dart';
 
 class MoviesScreen extends StatelessWidget {
-  const MoviesScreen({super.key,});
+  const MoviesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
+    // final themeProvider = Provider.of<ThemeProvider>(context);
+    log("message Rebuild Build Widget");
     return Scaffold(
       appBar: AppBar(
         title: Text("Popular Movies"),
         actions: [
           IconButton(
             onPressed: () {
-              themeProvider.toggleTheme();
               // Todo: Navigate to the favorites screen
               getIt<NavigationService>().navigator(FavoritesScreen());
               // Navigator.push(
@@ -33,23 +35,29 @@ class MoviesScreen extends StatelessWidget {
             },
             icon: const Icon(MyAppIcons.favoriteRounded, color: Colors.red),
           ),
-          IconButton(
-            onPressed: () async {
-              List<MoviesModal> movies = await getIt<MoviesRepository>()
-                  .fetchMovies();
-              List<MoviesGenres> genres = await getIt<MoviesRepository>()
-                  .fetchGenres();
-              log("Movies :- \n$movies");
-              log("Genres :- \n$genres");
+          Consumer(
+            builder: (context, ThemeProvider themeProvider, child) {
+              log("message Rebuild Theme Icon btn");
+              print("message Rebuild Theme Icon btn");
+              return IconButton(
+                onPressed: () async {
+                  themeProvider.toggleTheme();
+                },
+                icon: Icon(
+                  themeProvider.themeData == MyThemeData.darkTheme
+                      ? MyAppIcons.lightMode
+                      : MyAppIcons.darkMode,
+                  color: Colors.grey,
+                ),
+              );
             },
-            icon: Icon(MyAppIcons.dartMode, color: Colors.grey),
           ),
         ],
       ),
       body: ListView.builder(
         itemCount: 10,
         itemBuilder: (context, index) {
-            return MovieWidget();
+          return MovieWidget();
         },
       ),
     );
