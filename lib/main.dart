@@ -30,13 +30,17 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<ThemeProvider>(create: (_) => ThemeProvider()),
       ],
-      child: MaterialApp(
-        navigatorKey: getIt<NavigationService>().navigatorKey,
-        debugShowCheckedModeBanner: false,
-        title: 'Movies App',
-        theme: themeProvider.themeData,
-        // home: const SplashScreen(),
-        home: const MoviesScreen(),
+      child: Consumer(
+        builder: (context, ThemeProvider themeProvider, child) {
+          return MaterialApp(
+            navigatorKey: getIt<NavigationService>().navigatorKey,
+            debugShowCheckedModeBanner: false,
+            title: 'Movies App',
+            theme: themeProvider.themeData,
+            // home: const SplashScreen(),
+            home: const MoviesScreen(),
+          );
+        },
       ),
     );
   }
