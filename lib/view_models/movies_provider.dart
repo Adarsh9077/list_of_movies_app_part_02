@@ -14,5 +14,13 @@ class MoviesProvider with ChangeNotifier {
   String get fetchMoviesError => _fetchMoviesError;
 
   final MoviesRepository _moviesRepository = getIt<MoviesRepository>();
-  Future<void> getMovies() async {}
+  Future<void> getMovies() async {
+    _isLoading = true;
+    notifyListeners();
+    try {} catch (error) {
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
 }
