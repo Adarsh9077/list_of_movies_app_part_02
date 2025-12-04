@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:mvvm_state_management/models/movies_genres.dart';
 import 'package:mvvm_state_management/models/movies_modal.dart';
@@ -29,7 +31,13 @@ class MoviesProvider with ChangeNotifier {
         page: _currentPage,
       );
       _moviesList.addAll(movies);
+      _currentPage++;
+      _fetchMoviesError = "";
     } catch (error) {
+      log("An Error occurred in fetch movies $error");
+      _fetchMoviesError = error.toString();
+      notifyListeners();
+      rethrow;
     } finally {
       _isLoading = false;
       notifyListeners();
