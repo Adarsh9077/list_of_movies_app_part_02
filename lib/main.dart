@@ -6,6 +6,7 @@ import 'package:mvvm_state_management/constants/my_theme_data.dart';
 import 'package:mvvm_state_management/screens/movies_screen.dart';
 import 'package:mvvm_state_management/screens/splash_screen.dart';
 import 'package:mvvm_state_management/services/init_getit.dart';
+import 'package:mvvm_state_management/view_models/movies_provider.dart';
 import 'package:mvvm_state_management/services/navigation_service.dart';
 import 'package:mvvm_state_management/view_models/theme_provider.dart';
 
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<ThemeProvider>(create: (_) => ThemeProvider()),
+        ChangeNotifierProvider(create: (_) => MoviesProvider()),
       ],
       child: Consumer(
         builder: (context, ThemeProvider themeProvider, child) {

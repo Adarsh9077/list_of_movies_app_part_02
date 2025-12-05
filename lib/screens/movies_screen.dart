@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:mvvm_state_management/constants/my_app_constant.dart';
 import 'package:mvvm_state_management/constants/my_theme_data.dart';
+import 'package:mvvm_state_management/view_models/movies_provider.dart';
 import 'package:mvvm_state_management/view_models/theme_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:mvvm_state_management/constants/my_app_icons.dart';

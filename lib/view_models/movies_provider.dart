@@ -36,7 +36,6 @@ class MoviesProvider with ChangeNotifier {
     } catch (error) {
       log("An Error occurred in fetch movies $error");
       _fetchMoviesError = error.toString();
-      notifyListeners();
       rethrow;
     } finally {
       _isLoading = false;
