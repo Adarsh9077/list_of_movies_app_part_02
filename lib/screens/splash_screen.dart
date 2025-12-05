@@ -38,17 +38,32 @@ class SplashScreen extends StatelessWidget {
   //   super.initState();
   //   _loadData();
   // }
+  Future<void> _loadInitialData(BuildContext context) async {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<MoviesProvider>(context,listen: false).getMovies();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    final moviesProvider = Provider.of<MoviesProvider>(context);
+    // final moviesProvider = Provider.of<MoviesProvider>(context);
 
     return Scaffold(
       body: FutureBuilder(
-        future: future,
+        future: _loadInitialData(context),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return CircularProgressIndicator.adaptive();
+          } else if (snapshot.hasError) {
+            return MyErrorWidget(
+              errorText: snapshot.error.toString(),
+              retryFunction: () {},
+            );
+          } else {
+            WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+              getIt<NavigationService>().navigateReplace(const MoviesScreen());
+            });
+            return SizedBox.shrink();
           }
         },
       ),
