@@ -39,14 +39,15 @@ class SplashScreen extends StatelessWidget {
   //   _loadData();
   // }
   Future<void> _loadInitialData(BuildContext context) async {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      Provider.of<MoviesProvider>(context,listen: false).getMovies();
+    await Future.microtask(() async {
+      if (!context.mounted) return;
+      await Provider.of<MoviesProvider>(context, listen: false).getMovies();
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    // final moviesProvider = Provider.of<MoviesProvider>(context);
+    final moviesProvider = Provider.of<MoviesProvider>(context, listen: false);
 
     return Scaffold(
       body: FutureBuilder(
@@ -55,10 +56,19 @@ class SplashScreen extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return CircularProgressIndicator.adaptive();
           } else if (snapshot.hasError) {
-            return MyErrorWidget(
-              errorText: snapshot.error.toString(),
-              retryFunction: () {},
-            );
+            if (moviesProvider.genresList.isNotEmpty) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                getIt<NavigationService>().navigateReplace(
+                  const MoviesScreen(),
+                );
+              });
+            }
+            return Provider.of<MoviesProvider>(context).isLoading
+                ? const CircularProgressIndicator.adaptive()
+                : MyErrorWidget(
+                    errorText: snapshot.error.toString(),
+                    retryFunction: () {},
+                  );
           } else {
             WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
               getIt<NavigationService>().navigateReplace(const MoviesScreen());
