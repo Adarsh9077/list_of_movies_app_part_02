@@ -5,7 +5,9 @@ import 'package:mvvm_state_management/models/movies_modal.dart';
 import 'package:mvvm_state_management/screens/movie_details.dart';
 import 'package:mvvm_state_management/services/init_getit.dart';
 import 'package:mvvm_state_management/services/navigation_service.dart';
+import 'package:mvvm_state_management/view_models/movies_provider.dart';
 import 'package:mvvm_state_management/widgets/movies/genres_list_widget.dart';
+import 'package:provider/provider.dart';
 
 import '../cached_image.dart';
 import 'favorite_btn.dart';
@@ -19,6 +21,7 @@ class MovieWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final moviesModelProvider = Provider.of<MoviesModal>(context);
     return Padding(
       padding: EdgeInsets.all(8),
       child: Material(
@@ -46,8 +49,8 @@ class MovieWidget extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(12.0),
                     child: CachedImageWidget(
-                      imgUrl: MyAppConstants.movieImage,
-                      // "https://image.tmdb.org/t/p/w500/${moviesModal.backdropPath}",
+                      imgUrl:
+                          "https://image.tmdb.org/t/p/w500/${moviesModelProvider.backdropPath}",
                     ),
                   ),
                   // ),
@@ -57,7 +60,7 @@ class MovieWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "moviesModal.title",
+                          moviesModelProvider.title,
                           style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -69,8 +72,7 @@ class MovieWidget extends StatelessWidget {
                             Icon(Icons.star, color: Colors.amber, size: 20),
                             SizedBox(width: 5),
                             Text(
-                              "8.0/10",
-                              // "${moviesModal.voteAverage.toStringAsFixed(1)}/10",
+                              "${moviesModelProvider.voteAverage.toStringAsFixed(1)}/10",
                             ),
                           ],
                         ),
@@ -88,7 +90,7 @@ class MovieWidget extends StatelessWidget {
                             ),
                             const SizedBox(width: 5),
                             Text(
-                              " moviesModal.releaseDate",
+                              moviesModelProvider.releaseDate,
                               style: TextStyle(color: Colors.grey),
                             ),
                             const Spacer(),

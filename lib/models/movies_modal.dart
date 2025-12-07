@@ -1,4 +1,6 @@
-class MoviesModal {
+import 'package:flutter/material.dart';
+
+class MoviesModal with ChangeNotifier {
   bool adult;
   String backdropPath;
   List<int> genreIds;
