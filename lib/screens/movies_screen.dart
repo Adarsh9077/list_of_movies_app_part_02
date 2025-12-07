@@ -55,10 +55,31 @@ class MoviesScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: ListView.builder(
-        itemCount: 10,
-        itemBuilder: (context, index) {
-          return MovieWidget();
+      body: Consumer(
+        builder: (context, MoviesProvider moviesProvider, child) {
+          if (moviesProvider.isLoading && moviesProvider.moviesList.isEmpty) {
+            return Center(child: CircularProgressIndicator.adaptive());
+          } else if (moviesProvider.fetchMoviesError.isNotEmpty) {
+            return Center(child: Text(moviesProvider.fetchMoviesError));
+          }
+          return NotificationListener<ScrollNotification>(
+            onNotification: (ScrollNotification scrollInfo) {
+              if (scrollInfo.metrics.pixels ==
+                      scrollInfo.metrics.maxScrollExtent &&
+                  !moviesProvider.isLoading) {
+                moviesProvider.getMovies();
+                return true;
+              }
+              print("object");
+              return false;
+            },
+            child: ListView.builder(
+              itemCount: moviesProvider.moviesList.length,
+              itemBuilder: (context, index) {
+                return const MovieWidget();
+              },
+            ),
+          );
         },
       ),
     );
