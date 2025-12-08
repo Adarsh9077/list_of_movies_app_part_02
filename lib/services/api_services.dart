@@ -24,7 +24,7 @@ class ApiServices {
 
   Future<List<MoviesGenres>> fetchGenres() async {
     final url = Uri.parse(
-      "${ApiConstants.baseUrl}/genre/movie/list?language=en",
+      "${ApiConstants.baseUrl}/genre/movie/list?language=en/",
     );
     final response = await https
         .get(url, headers: ApiConstants.header)

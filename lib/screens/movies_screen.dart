@@ -70,7 +70,6 @@ class MoviesScreen extends StatelessWidget {
                 moviesProvider.getMovies();
                 return true;
               }
-              print("object");
               return false;
             },
             child: ListView.builder(

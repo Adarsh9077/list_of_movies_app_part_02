@@ -31,8 +31,9 @@ class MovieWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           onTap: () {
             getIt<NavigationService>().navigator(
-              MovieDetailScreen(
-                // moviesModel: moviesModal
+              ChangeNotifierProvider.value(
+                value: moviesModelProvider,
+                child: MovieDetailScreen(/*moviesModel: moviesModelProvider*/),
               ),
             );
           },
@@ -43,17 +44,16 @@ class MovieWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  // Hero(
-                  //   tag: "", //moviesModal.id,
-                  //   child:
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(12.0),
-                    child: CachedImageWidget(
-                      imgUrl:
-                          "https://image.tmdb.org/t/p/w500/${moviesModelProvider.backdropPath}",
+                  Hero(
+                    tag: moviesModelProvider.id, //moviesModal.id,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(12.0),
+                      child: CachedImageWidget(
+                        imgUrl:
+                            "https://image.tmdb.org/t/p/w500/${moviesModelProvider.backdropPath}",
+                      ),
                     ),
                   ),
-                  // ),
                   const SizedBox(width: 10),
                   Expanded(
                     child: Column(
@@ -77,9 +77,7 @@ class MovieWidget extends StatelessWidget {
                           ],
                         ),
                         const SizedBox(height: 10),
-                        GenresListWidget(
-                          // moviesModal: moviesModal
-                        ),
+                        GenresListWidget(moviesModal: moviesModelProvider),
                         Row(
                           mainAxisSize: MainAxisSize.max,
                           // mainAxisAlignment: MainAxisAlignment.spaceBetween,
