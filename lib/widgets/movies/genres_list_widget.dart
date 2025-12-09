@@ -11,6 +11,7 @@ class GenresListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     List<MoviesGenres> moviesGenres = GenresUtils.moviesGenresName(
       moviesModal.genreIds,
+      context,
     );
     return Wrap(
       children: List.generate(
