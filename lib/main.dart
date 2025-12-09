@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mvvm_state_management/view_models/favorite_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mvvm_state_management/constants/my_theme_data.dart';
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<ThemeProvider>(create: (_) => ThemeProvider()),
         ChangeNotifierProvider(create: (_) => MoviesProvider()),
+        ChangeNotifierProvider(create:(_)=> FavoriteProvider()),
       ],
       child: Consumer(
         builder: (context, ThemeProvider themeProvider, child) {

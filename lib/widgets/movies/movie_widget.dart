@@ -93,7 +93,7 @@ class MovieWidget extends StatelessWidget {
                             ),
                             const Spacer(),
                             FavoriteBtnWidget(
-                              // moviesModal: moviesModal
+                              moviesModal: moviesModelProvider,
                             ),
                             // Todo: Add the favorite button
                           ],

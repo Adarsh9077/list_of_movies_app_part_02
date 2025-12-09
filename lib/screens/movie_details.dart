@@ -116,7 +116,7 @@ class MovieDetailScreen extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.all(6.0),
                             child: FavoriteBtnWidget(
-                              // moviesModal: moviesModel
+                              moviesModal: moviesModelProvider
                             ),
                           ),
                         ),
